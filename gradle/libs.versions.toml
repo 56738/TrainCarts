@@ -8,6 +8,7 @@ multiverse = "4.2.0"
 myworlds = "1.11.2-v2-SNAPSHOT"
 neznamy-tab-hider = "1.01"
 preloader = "1.8"
+run-paper = "2.1.0"
 shadow = "8.1.1"
 signlink = "1.11.2-v2-SNAPSHOT"
 smoothcoasters-api = "1.10"
@@ -40,3 +41,4 @@ cloud = ["cloud-paper", "cloud-annotations", "cloud-minecraft-extras"]
 
 [plugins]
 shadow = { id = "com.github.johnrengelman.shadow", version.ref = "shadow" }
+run-paper = { id = "xyz.jpenilla.run-paper", version.ref = "run-paper" }

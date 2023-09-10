@@ -1,6 +1,7 @@
 plugins {
     id("java-library")
     id("maven-publish")
+    alias(libs.plugins.run.paper)
     alias(libs.plugins.shadow)
 }
 
@@ -22,6 +23,10 @@ repositories {
     maven("https://ci.mg-dev.eu/plugin/repository/everything/")
     maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://maven.enginehub.org/repo/")
+}
+
+configurations {
+    register("plugin")
 }
 
 dependencies {
@@ -52,6 +57,11 @@ dependencies {
     testImplementation(libs.junit)
     testImplementation(libs.spigot)
     testImplementation(libs.bkcommonlib)
+
+    // Plugin dependencies for the runServer task
+    "plugin"(variantOf(libs.bkcommonlib) { classifier("all") }) {
+        isTransitive = false // only need the plugin itself
+    }
 }
 
 java {
@@ -122,5 +132,10 @@ tasks {
 
         isPreserveFileTimestamps = false
         isReproducibleFileOrder = true
+    }
+
+    runServer {
+        minecraftVersion("1.20.1")
+        pluginJars.from(configurations.named("plugin"))
     }
 }
